@@ -1,0 +1,11 @@
+apk add ansible  sshpass
+
+rm -rf /root/.ssh
+
+ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
+
+sshpass -p 'root' ssh-copy-id -o stricthostkeychecking=no root@192.168.56.103
+
+echo "192.168.56.103" > inventaire
+
+ansible -m ping -i inventaire 192.168.56.103
